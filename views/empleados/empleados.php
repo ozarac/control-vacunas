@@ -58,7 +58,7 @@
             </a>
         </div>
         <hr class="col-3 col-md-2 mb-5">
-        <div class="container-fluid">
+        <div class="container">
             <div class="table-responsive">
                 <table class="table table-hover">
                     <caption>Lista de empleados</caption>
@@ -127,7 +127,22 @@
                                 echo "<td class='text-center'>".$primera_dosis."</td>";
                                 echo "<td class='text-center'>".$segunda_dosis."</td>";
                                 echo "<td class='text-center'>".$estado."</td>";
-                                echo "<td>"."</td>";
+                                echo "<td class='text-center' style='white-space: nowrap;'>
+                                        <div class='btn-group'>
+                                            <span data-toggle='tooltip' title='Editar'>
+                                                <a class='btn btn-default' title='Editar'
+                                                   href='index.php?c=empleados&a=change&id=".$item['id']."'>
+                                                    <i class='fas fa-pencil-alt text-warning'></i>
+                                                </a>
+                                            </span>
+                                            <span data-toggle='tooltip' title='Eliminar'>
+                                                <a class='btn btn-default' title='Eliminar'
+                                                   href='index.php?c=empleados&a=delete&id=".$item['id']."'>
+                                                    <i class='fas fa-trash text-danger'></i>
+                                                </a>
+                                            </span>
+                                        </div>
+                                    </td>";
                                 echo "</tr>";
                             }
                         ?>
