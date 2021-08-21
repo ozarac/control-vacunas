@@ -85,14 +85,14 @@
                 <div class="col-md-12">
                     <label for="vacuna_id" class="form-label">Vacuna</label>
                     <select id="vacuna_id" name="vacuna_id" class="form-select" aria-label="Seleccionar vacuna" required>
-                        <option disabled selected>Seleccionar vacuna</option>
+                        <option value="" selected>Seleccionar vacuna</option>
                         <option value="1">Sinopharm</option>
                         <option value="2">AstraZeneca</option>
                         <option value="3">Sputnik V</option>
                         <option value="4">Pfizer</option>
                         <option value="5">Moderna</option>
                         <option value="6">Janssen</option>
-                        <option value="">Ninguna</option>
+                        <option value="0">Ninguna</option>
                     </select>
                 </div>
                 <div class="col-md-12">
@@ -118,11 +118,27 @@
 <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="assets/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 <script src="assets/bootstrap-datepicker/locales/bootstrap-datepicker.es.min.js" charset="UTF-8"></script>
+<script src="assets/jquery-validator/jquery.validate.min.js"></script>
+<script src="assets/jquery-validator/localization/messages_es.min.js" charset="UTF-8"></script>
 
 <script>
     $('.datepicker').datepicker({
         format: 'dd/mm/yyyy',
         language: 'es'
+    });
+</script>
+
+<script>
+    $("#save").validate({
+        highlight: function(element, errorClass) {
+            $(element).fadeOut(function() {
+                $(element).fadeIn();
+            });
+        },
+        submitHandler: function(form){
+            form.submit();
+            $("button").attr('disabled','disabled');
+        }
     });
 </script>
 </body>

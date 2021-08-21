@@ -27,19 +27,24 @@ class EmpleadosController
         $segundo_nombre = $_POST['segundo_nombre'] ?? NULL;
         $primer_apellido = $_POST['primer_apellido'] ?? NULL;
         $segundo_apellido = $_POST['segundo_apellido'] ?? NULL;
-        $vacuna_id = $_POST['vacuna_id'] ?? NULL;
+        $vacuna_id = NULL;
         $primera_dosis = NULL;
-        if (isset($_POST['primera_dosis']) and $_POST['primera_dosis'] != '') {
-            $date = $_POST['primera_dosis'];
-            $date = str_replace('/', '-', $date);
-            if (date('Y-m-d', strtotime($date)) > strtotime(date('2020-01-01')))
-                $primera_dosis = date('Y-m-d', strtotime($date));
+        $segunda_dosis = NULL;
+        if (isset($_POST['vacuna_id'])){
+            if($_POST['vacuna_id'] != '' && $_POST['vacuna_id'] != 0){
+                $vacuna_id = $_POST['vacuna_id'];
+                if (isset($_POST['primera_dosis']) and $_POST['primera_dosis'] != '') {
+                    $date = $_POST['primera_dosis'];
+                    $date = str_replace('/', '-', $date);
+                    if (date('Y-m-d', strtotime($date)) > strtotime(date('2020-01-01')))
+                        $primera_dosis = date('Y-m-d', strtotime($date));
+                }
+            }
         }
-        $segunda_dosis = $_POST['segunda_dosis'] ?? NULL;
         $puesto_laboral = $_POST['puesto_laboral'] ?? NULL;
-
         $empleados = new Empleados_model();
-        $empleados->insert($primer_nombre,$segundo_nombre,$primer_apellido,$segundo_apellido,$vacuna_id,$primera_dosis,$segunda_dosis,$puesto_laboral);
+        if ($primer_nombre != NULL && $primer_apellido != NULL && $puesto_laboral != NULL)
+            $empleados->insert($primer_nombre,$segundo_nombre,$primer_apellido,$segundo_apellido,$vacuna_id,$primera_dosis,$segunda_dosis,$puesto_laboral);
         $data["titulo"] = "Empleados";
         $this->index();
     }

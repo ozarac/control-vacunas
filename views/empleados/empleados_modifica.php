@@ -135,7 +135,6 @@
 </script>
 
 <script>
-
     $.validator.addMethod("minDate", function(e) {
         var maxDate = $('#primera_dosis').datepicker("getDate");
         var minDate = $('#segunda_dosis').datepicker("getDate");
@@ -173,7 +172,6 @@
             }
         }
     });
-
 </script>
 
 
