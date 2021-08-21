@@ -8,7 +8,10 @@
         $controller = loadController($_GET['c']);
 
         if(isset($_GET['a']))
-            loadAction($controller,$_GET['a']);
+            if(isset($_GET['id']))
+                loadAction($controller,$_GET['a'],$_GET['id']);
+            else
+                loadAction($controller,$_GET['a']);
         else
             loadAction($controller,DEFAULT_ACTION);
     }else{

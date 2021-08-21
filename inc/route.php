@@ -14,9 +14,12 @@ function loadController($controller = DEFAULT_CONTROLLER){
     return $controller;
 }
 
-function loadAction($controller, $action = DEFAULT_ACTION){
+function loadAction($controller, $action = DEFAULT_ACTION, $id = NULL){
     if (method_exists($controller,$action))
-        $controller->$action();
+        if($id == NULL)
+            $controller->$action();
+        else
+            $controller->$action($id);
     else{
         $action = DEFAULT_ACTION;
         $controller->$action();
