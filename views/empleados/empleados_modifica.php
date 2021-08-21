@@ -62,7 +62,7 @@
         </a>
         <hr class="col-3 col-md-2 mb-5">
         <div class="container-fluid">
-            <form class="row g-3" id="update" name="update" method="POST" action="index.php?c=empleados&a=update" autocomplete="off">
+            <form class="row g-3 js-validate-empleado" id="update" name="update" method="POST" action="index.php?c=empleados&a=update" autocomplete="off">
                 <input type="hidden" id="id" name="id" value="<?php echo $data['id'] ?>">
                 <div class="col-md-6">
                     <label for="primer_nombre" class="form-label" >Primer nombre</label>
@@ -87,14 +87,14 @@
                 <div class="col-md-12">
                     <label for="vacuna_id" class="form-label">Vacuna</label>
                     <select id="vacuna_id" name="vacuna_id" class="form-select" aria-label="Seleccionar vacuna" required>
-                        <option selected>Seleccionar vacuna</option>
+                        <option value="" selected>Seleccionar vacuna</option>
                         <option value="1" <?php if ($data['empleados']['vacuna_id'] == 1) echo 'selected'?>>Sinopharm</option>
                         <option value="2" <?php if ($data['empleados']['vacuna_id'] == 2) echo 'selected'?>>AstraZeneca</option>
                         <option value="3" <?php if ($data['empleados']['vacuna_id'] == 3) echo 'selected'?>>Sputnik V</option>
                         <option value="4" <?php if ($data['empleados']['vacuna_id'] == 4) echo 'selected'?>>Pfizer</option>
                         <option value="5" <?php if ($data['empleados']['vacuna_id'] == 5) echo 'selected'?>>Moderna</option>
                         <option value="6" <?php if ($data['empleados']['vacuna_id'] == 6) echo 'selected'?>>Janssen</option>
-                        <option value="" <?php if ($data['empleados']['vacuna_id'] == NULL) echo 'selected'?>>Ninguna</option>
+                        <option value="0" <?php if ($data['empleados']['vacuna_id'] == NULL) echo 'selected'?>>Ninguna</option>
                     </select>
                 </div>
                 <div class="col-md-6">
@@ -124,12 +124,56 @@
 <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="assets/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 <script src="assets/bootstrap-datepicker/locales/bootstrap-datepicker.es.min.js" charset="UTF-8"></script>
+<script src="assets/jquery-validator/jquery.validate.min.js"></script>
+<script src="assets/jquery-validator/localization/messages_es.min.js" charset="UTF-8"></script>
 
 <script>
     $('.datepicker').datepicker({
         format: 'dd/mm/yyyy',
         language: 'es'
     });
+</script>
+
+<script>
+
+    $.validator.addMethod("minDate", function(e) {
+        var maxDate = $('#primera_dosis').datepicker("getDate");
+        var minDate = $('#segunda_dosis').datepicker("getDate");
+        console.log(minDate);
+        console.log(maxDate);
+        if (minDate != null  ) {
+            if (minDate <= maxDate){
+                console.log('falso');
+                return false;
+            }
+            return true;
+        }
+        return true;
+    });
+
+    $("#update").validate({
+        highlight: function(element, errorClass) {
+            $(element).fadeOut(function() {
+                $(element).fadeIn();
+            });
+        },
+        submitHandler: function(form){
+            form.submit();
+            $("button").attr('disabled','disabled');
+        },
+        rules: {
+            'segunda_dosis': {
+                required: false,
+                minDate: true
+            }
+        },
+        messages: {
+            'segunda_dosis': {
+                minDate: 'Por favor ingrese una fecha mayor a primera dosis.'
+            }
+        }
+    });
+
 </script>
 
 
