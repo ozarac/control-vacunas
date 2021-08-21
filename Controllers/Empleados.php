@@ -74,4 +74,11 @@ class EmpleadosController
         $data["titulo"] = "Empleados";
         $this->index();
     }
+
+    public function delete($id){
+        $empleados = new Empleados_model();
+        $empleados->delete($id);
+        $data["titulo"] = "Empleados";
+        $this->index();
+    }
 }
