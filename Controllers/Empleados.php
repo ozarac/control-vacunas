@@ -70,7 +70,6 @@ class EmpleadosController
                 $primera_dosis = date('Y-m-d', strtotime($date));
         }
         $segunda_dosis = NULL;
-        echo $_POST['segunda_dosis'];
         if (isset($_POST['segunda_dosis']) and $_POST['segunda_dosis'] != ''){
             $date = $_POST['segunda_dosis'];
             $date = str_replace('/','-',$date);
