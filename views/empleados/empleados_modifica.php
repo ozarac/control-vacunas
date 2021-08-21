@@ -18,6 +18,8 @@
     <!-- FontAwesome -->
     <link href="assets/fontawesome/css/all.css" rel="stylesheet"> <!--load all styles -->
 
+    <link href="assets/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -97,11 +99,11 @@
                 </div>
                 <div class="col-md-6">
                     <label for="primera_dosis" class="form-label">Fecha primera dosis</label>
-                    <input type="date" class="form-control" id="primera_dosis" name="primera_dosis" value="<?php echo $data['empleados']['primera_dosis'] ?>" min="<?php echo date('2020-01-01'); ?>" max="<?php echo date('Y-m-d'); ?>">
+                    <input type="text" class="form-control datepicker" id="primera_dosis" name="primera_dosis" data-date-format="dd/mm/yyyy" placeholder="dd/mm/yyyy" value="<?php if($data['empleados']['primera_dosis'] != NULL or $data['empleados']['primera_dosis'] != '') echo date('d/m/Y',strtotime($data['empleados']['primera_dosis'])) ?>" data-date-start-date="01/01/2020" data-date-end-date="0d">
                 </div>
                 <div class="col-md-6">
                     <label for="segunda_dosis" class="form-label">Fecha segunda dosis</label>
-                    <input type="date" class="form-control" id="segunda_dosis" name="segunda_dosis" value="<?php echo $data['empleados']['segunda_dosis'] ?>" min="<?php echo date('2020-01-01'); ?>">
+                    <input type="text" class="form-control datepicker" id="segunda_dosis" name="segunda_dosis" data-date-format="dd/mm/yyyy" placeholder="dd/mm/yyyy" value="<?php if($data['empleados']['segunda_dosis'] != NULL or $data['empleados']['segunda_dosis'] != '') echo  date('d/m/Y',strtotime($data['empleados']['segunda_dosis'])) ?>" data-date-start-date="01/01/2020">
                 </div>
                 <div class="col-md-12 text-center">
                     <button class="btn btn-md  btn-warning" type="submit" name="update" id="update" >
@@ -117,7 +119,18 @@
 </div>
 
 
+
+<script src="assets/jquery/jquery-3.6.0.min.js"></script>
 <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="assets/bootstrap-datepicker/locales/bootstrap-datepicker.es.min.js" charset="UTF-8"></script>
+
+<script>
+    $('.datepicker').datepicker({
+        format: 'dd/mm/yyyy',
+        language: 'es'
+    });
+</script>
 
 
 </body>

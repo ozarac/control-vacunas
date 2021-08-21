@@ -29,9 +29,12 @@ class EmpleadosController
         $segundo_apellido = $_POST['segundo_apellido'] ?? NULL;
         $vacuna_id = $_POST['vacuna_id'] ?? NULL;
         $primera_dosis = NULL;
-        if (isset($_POST['primera_dosis']))
-            if(strtotime($_POST['primera_dosis']) > strtotime(date('2020-01-01')))
-                $primera_dosis = $_POST['primera_dosis'];
+        if (isset($_POST['primera_dosis']) and $_POST['primera_dosis'] != '') {
+            $date = $_POST['primera_dosis'];
+            $date = str_replace('/', '-', $date);
+            if (date('Y-m-d', strtotime($date)) > strtotime(date('2020-01-01')))
+                $primera_dosis = date('Y-m-d', strtotime($date));
+        }
         $segunda_dosis = $_POST['segunda_dosis'] ?? NULL;
         $puesto_laboral = $_POST['puesto_laboral'] ?? NULL;
 
@@ -60,13 +63,21 @@ class EmpleadosController
             if($_POST['vacuna_id'] != '')
                 $vacuna_id = $_POST['vacuna_id'];
         $primera_dosis = NULL;
-        if (isset($_POST['primera_dosis']))
-            if(strtotime($_POST['primera_dosis']) > strtotime(date('2020-01-01')))
-                $primera_dosis = $_POST['primera_dosis'];
+        if (isset($_POST['primera_dosis']) and $_POST['primera_dosis'] != '') {
+            $date = $_POST['primera_dosis'];
+            $date = str_replace('/', '-', $date);
+            if (date('Y-m-d', strtotime($date)) > strtotime(date('2020-01-01')))
+                $primera_dosis = date('Y-m-d', strtotime($date));
+        }
         $segunda_dosis = NULL;
-        if (isset($_POST['segunda_dosis']))
-            if(strtotime($_POST['segunda_dosis']) > strtotime(date('2020-01-01')))
-                $segunda_dosis = $_POST['segunda_dosis'];
+        echo $_POST['segunda_dosis'];
+        if (isset($_POST['segunda_dosis']) and $_POST['segunda_dosis'] != ''){
+            $date = $_POST['segunda_dosis'];
+            $date = str_replace('/','-',$date);
+            if(date('Y-m-d',strtotime($date)) > strtotime(date('2020-01-01')))
+                $segunda_dosis = date('Y-m-d',strtotime($date));
+        }
+
         $puesto_laboral = $_POST['puesto_laboral'];
 
         $empleados = new Empleados_model();
