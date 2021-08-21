@@ -17,6 +17,8 @@ function loadController($controller = DEFAULT_CONTROLLER){
 function loadAction($controller, $action = DEFAULT_ACTION){
     if (method_exists($controller,$action))
         $controller->$action();
-    else
-        $controller->DEFAULT_ACTION();
+    else{
+        $action = DEFAULT_ACTION;
+        $controller->$action();
+    }
 }
