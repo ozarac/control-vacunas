@@ -47,7 +47,7 @@
             <span style="font-size: 2.5em; margin-right: 10px;">
               <i class="fas fa-syringe"></i>
             </span>&nbsp;
-            <h1>CONTROL DE VACUNACIÓN COVID-19</h1>
+            <h1><strong>CONTROL DE VACUNACIÓN COVID-19</strong></h1>
         </a>
     </header>
     <main>
@@ -62,7 +62,7 @@
         </a>
         <hr class="col-3 col-md-2 mb-5">
         <div class="container-fluid">
-            <form class="row g-3 js-validate-empleado" id="update" name="update" method="POST" action="index.php?c=empleados&a=update" autocomplete="off">
+            <form class="row g-3 js-validate-empleado needs-validation" id="update" name="update" method="POST" action="index.php?c=empleados&a=update" autocomplete="off" novalidate>
                 <input type="hidden" id="id" name="id" value="<?php echo $data['id'] ?>">
                 <div class="col-md-6">
                     <label for="primer_nombre" class="form-label" >Primer nombre</label>
@@ -133,7 +133,23 @@
         language: 'es'
     });
 </script>
+<script>
+    (function () {
+        'use strict'
+        const forms = document.querySelectorAll('.needs-validation')
+        Array.from(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
 
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>
 <script>
     $.validator.addMethod("minDate", function(e) {
         var maxDate = $('#primera_dosis').datepicker("getDate");

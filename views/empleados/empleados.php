@@ -45,7 +45,7 @@
             <span style="font-size: 2.5em; margin-right: 10px;">
               <i class="fas fa-syringe"></i>
             </span>&nbsp;
-            <h1>CONTROL DE VACUNACIÓN COVID-19</h1>
+            <h1><strong>CONTROL DE VACUNACIÓN COVID-19</strong></h1>
         </a>
     </header>
     <main>

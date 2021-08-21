@@ -46,7 +46,7 @@
             <span style="font-size: 2.5em; margin-right: 10px;">
               <i class="fas fa-syringe"></i>
             </span>&nbsp;
-            <h1>CONTROL DE VACUNACIÓN COVID-19</h1>
+            <h1><strong>CONTROL DE VACUNACIÓN COVID-19</strong></h1>
         </a>
     </header>
     <main>
@@ -60,8 +60,8 @@
             <h5 style="color: #0a53be;">Regresar</h5>
         </a>
         <hr class="col-3 col-md-2 mb-5">
-        <div class="container-fluid">
-            <form class="row g-3" id="save" name="save" method="POST" action="index.php?c=empleados&a=save" autocomplete="off">
+        <div class="">
+            <form class="row g-3 needs-validation" id="save" name="save" method="POST" action="index.php?c=empleados&a=save" autocomplete="off" novalidate>
                 <div class="col-md-6">
                     <label for="primer_nombre" class="form-label" >Primer nombre</label>
                     <input type="text" class="form-control" id="primer_nombre" name="primer_nombre" required>
@@ -97,7 +97,7 @@
                 </div>
                 <div class="col-md-12">
                     <label for="primera_dosis" class="form-label">Fecha primera dosis</label>
-                    <input type="text" class="form-control datepicker" id="primera_dosis" name="primera_dosis" data-date-format="dd/mm/yyyy" placeholder="dd/mm/yyyy" data-date-start-date="01/01/2020" data-date-end-date="0d">
+                    <input type="text" class="form-control datepicker" id="primera_dosis" name="primera_dosis" data-date-format="dd/mm/yyyy" placeholder="dd/mm/yyyy" data-date-start-date="01/01/2020" data-date-end-date="0d" required>
                 </div>
                 <div class="col-md-12 text-center">
                     <button class="btn btn-md  btn-success" type="submit" name="registrar" id="registrar" >
@@ -129,6 +129,24 @@
 </script>
 
 <script>
+    (function () {
+        'use strict'
+        const forms = document.querySelectorAll('.needs-validation')
+        Array.from(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>
+
+<script>
     $("#save").validate({
         highlight: function(element, errorClass) {
             $(element).fadeOut(function() {
@@ -141,5 +159,6 @@
         }
     });
 </script>
+
 </body>
 </html>
