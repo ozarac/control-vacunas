@@ -52,7 +52,12 @@
         <div class="mb-5">
             <h2>Actualizar empleado</h2>
         </div>
-
+        <a href="index.php" class="d-flex align-items-center text-dark text-decoration-none">
+            <span style="margin-right: 10px; color:#0a53be;">
+              <i class="fas fa-arrow-left"></i>
+            </span>&nbsp;
+            <h5 style="color: #0a53be;">Regresar</h5>
+        </a>
         <hr class="col-3 col-md-2 mb-5">
         <div class="container-fluid">
             <form class="row g-3" id="update" name="update" method="POST" action="index.php?c=empleados&a=update" autocomplete="off">

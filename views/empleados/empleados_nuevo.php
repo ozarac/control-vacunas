@@ -52,7 +52,12 @@
         <div class="mb-5">
             <h2>Registrar empleado</h2>
         </div>
-
+        <a href="index.php" class="d-flex align-items-center text-dark text-decoration-none">
+            <span style="margin-right: 10px; color:#0a53be;">
+              <i class="fas fa-arrow-left"></i>
+            </span>&nbsp;
+            <h5 style="color: #0a53be;">Regresar</h5>
+        </a>
         <hr class="col-3 col-md-2 mb-5">
         <div class="container-fluid">
             <form class="row g-3" id="save" name="save" method="POST" action="index.php?c=empleados&a=save" autocomplete="off">
@@ -79,7 +84,7 @@
                 <div class="col-md-12">
                     <label for="vacuna_id" class="form-label">Vacuna</label>
                     <select id="vacuna_id" name="vacuna_id" class="form-select" aria-label="Seleccionar vacuna" required>
-                        <option selected>Seleccionar vacuna</option>
+                        <option disabled selected>Seleccionar vacuna</option>
                         <option value="1">Sinopharm</option>
                         <option value="2">AstraZeneca</option>
                         <option value="3">Sputnik V</option>
@@ -100,6 +105,7 @@
                 </div>
             </form>
         </div>
+
     </main>
     <footer class="pt-5 my-5 text-muted border-top">
         Stuart Carazo &middot; &copy; 2021
