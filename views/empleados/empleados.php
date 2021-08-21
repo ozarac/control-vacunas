@@ -72,80 +72,53 @@
                     <th class="text-center">Acción</th>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>Stuart Carazo</td>
-                        <td>Programador de Sistemas</td>
-                        <td class="text-center">Sputnik V</td>
-                        <td class="text-center">08/07/2021</td>
-                        <td class="text-center">08/10/2021</td>
-                        <td class="text-center"><span class="badge bg-warning">En progreso</span></td>
-                        <td class="text-center" style="white-space: nowrap;">
-                            <div class="btn-group">
-                                <span data-toggle="tooltip" title="Editar">
-                                    <a class="btn btn-default" title="Editar"
-                                       href="">
-                                        <i class="fas fa-pencil-alt text-warning"></i>
-                                    </a>
-                                </span>
-                                <span data-toggle="tooltip" title="Eliminar">
-                                    <a class="btn btn-default" title="Eliminar"
-                                       href="">
-                                        <i class="fas fa-trash text-danger"></i>
-                                    </a>
-                                </span>
-                            </div>
-                        </td>
-                    </tr>
-                        <?php
-                            foreach($data["empleados"] as $item){
-                                $estado = '';
+                    <?php
+                    foreach ($data["empleados"] as $item) {
+                        $estado = '<span class="badge bg-danger">En riesgo</span></td>';
+                        if ($item["segunda_dosis"] != NULL and strtotime($item["segunda_dosis"]) <= strtotime('today'))
+                            $estado = '<span class="badge bg-success">Protegido</span></td>';
+                        else if ($item["primera_dosis"] != NULL and strtotime($item["primera_dosis"]) <= strtotime('today')) {
+                            if ($item["segunda_dosis"] === NULL)
+                                $estado = '<span class="badge bg-success">Protegido</span></td>';
+                            else
+                                $estado = '<span class="badge bg-warning">En Progreso</span></td>';
+                        }
 
-                                if($item["segunda_dosis"] != NULL and strtotime($item["segunda_dosis"]) <= strtotime('today'))
-                                    $estado = '<span class="badge bg-success">Protegido</span></td>';
-                                else if ($item["primera_dosis"] != NULL and strtotime($item["primera_dosis"]) <= strtotime('today')){
-                                    if ($item["segunda_dosis"] === NULL)
-                                        $estado = '<span class="badge bg-success">Protegido</span></td>';
-                                    else
-                                        $estado = '<span class="badge bg-warning">En Progreso</span></td>';
-                                }
-                                else
-                                    $estado = '<span class="badge bg-danger">En riesgo</span></td>';
+                        if ($item["primera_dosis"] === NULL)
+                            $primera_dosis = 'N/A';
+                        else
+                            $primera_dosis = date('d/m/Y', strtotime($item["primera_dosis"]));
+                        if ($item["segunda_dosis"] === NULL)
+                            $segunda_dosis = 'N/A';
+                        else
+                            $segunda_dosis = date('d/m/Y', strtotime($item["segunda_dosis"]));
 
-                                if ($item["primera_dosis"] === NULL)
-                                    $primera_dosis = 'N/A';
-                                else
-                                    $primera_dosis = date ('d/m/Y',strtotime($item["primera_dosis"]));
-                                if ($item["segunda_dosis"] === NULL)
-                                    $segunda_dosis = 'N/A';
-                                else
-                                    $segunda_dosis = date ('d/m/Y',strtotime($item["segunda_dosis"]));
-
-                                echo "<tr>";
-                                echo "<td>".$item["nombre"]."</td>";
-                                echo "<td>".$item["puesto_laboral"]."</td>";
-                                echo "<td class='text-center'>".$item["vacuna"]."</td>";
-                                echo "<td class='text-center'>".$primera_dosis."</td>";
-                                echo "<td class='text-center'>".$segunda_dosis."</td>";
-                                echo "<td class='text-center'>".$estado."</td>";
-                                echo "<td class='text-center' style='white-space: nowrap;'>
+                        echo "<tr>";
+                        echo "<td>" . $item["nombre"] . "</td>";
+                        echo "<td>" . $item["puesto_laboral"] . "</td>";
+                        echo "<td class='text-center'>" . $item["vacuna"] . "</td>";
+                        echo "<td class='text-center'>" . $primera_dosis . "</td>";
+                        echo "<td class='text-center'>" . $segunda_dosis . "</td>";
+                        echo "<td class='text-center'>" . $estado . "</td>";
+                        echo "<td class='text-center' style='white-space: nowrap;'>
                                         <div class='btn-group'>
                                             <span data-toggle='tooltip' title='Editar'>
                                                 <a class='btn btn-default' title='Editar'
-                                                   href='index.php?c=empleados&a=change&id=".$item['id']."'>
+                                                   href='index.php?c=empleados&a=change&id=" . $item['id'] . "'>
                                                     <i class='fas fa-pencil-alt text-warning'></i>
                                                 </a>
                                             </span>
                                             <span data-toggle='tooltip' title='Eliminar'>
                                                 <a class='btn btn-default' title='Eliminar'
-                                                   href='index.php?c=empleados&a=delete&id=".$item['id']."'>
+                                                   href='index.php?c=empleados&a=delete&id=" . $item['id'] . "'>
                                                     <i class='fas fa-trash text-danger'></i>
                                                 </a>
                                             </span>
                                         </div>
                                     </td>";
-                                echo "</tr>";
-                            }
-                        ?>
+                        echo "</tr>";
+                    }
+                    ?>
                     </tbody>
                 </table>
             </div>
